@@ -1,0 +1,28 @@
+{
+  "name": "token",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.6",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
+    "eslint": "^8.4.0",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.4.7",
+    "hardhat": "^2.6.4",
+    "prettier": "^1.9.1",
+    "prettier-eslint": "^8.2.2"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.3.3",
+    "yargs-parser": ">=5.0.1"
+  }
+}
