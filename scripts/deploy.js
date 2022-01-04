@@ -19,13 +19,6 @@ async function main() {
   await fire.deployed();
   console.log("5ire Token deployed to:", fire.address);
   console.log("5ire Token Balance:", await fire.totalSupply());
-
-  // const Fire = await hre.ethers.getContractFactory("IreVest");
-  // const fire = await Fire.deploy();
-  // await fire.deployed();
-  // console.log("5ire Token deployed to:", fire.address);
-  // console.log("5ire Token Balance:", await fire.totalSupply());
-
 }
 
 // We recommend this pattern to be able to use async/await everywhere

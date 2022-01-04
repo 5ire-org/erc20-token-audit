@@ -17,6 +17,9 @@ contract IRE is ERC20, ERC20Burnable, Pausable, AccessControl {
     uint256 private constant INITIAL_SUPPLY =
         uint256(INITIAL_WHOLE_TOKENS) * uint256(TOKEN_WEI);
 
+    mapping(address => bool) _isBlacklisted;
+    event addToBlackListEvent(address indexed addresses);
+
     constructor() ERC20("5IRE Chain", "5IRE") {
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _mint(msg.sender, INITIAL_SUPPLY);
@@ -39,6 +42,35 @@ contract IRE is ERC20, ERC20Burnable, Pausable, AccessControl {
         address to,
         uint256 amount
     ) internal override whenNotPaused {
+        //add the require statement into the transfer function
+        require(
+            !_isBlacklisted[from] && !_isBlacklisted[to],
+            "This address is blacklisted"
+        );
         super._beforeTokenTransfer(from, to, amount);
+    }
+
+    //Adding multiple addresses to the blacklist - Used to manually block
+    function addToBlackList(address[] calldata addresses)
+        public
+        onlyRole(DEFAULT_ADMIN_ROLE)
+    {
+        for (uint256 i; i < addresses.length; ++i) {
+            _isBlacklisted[addresses[i]] = true;
+            emit addToBlackListEvent(addresses[i]);
+        }
+    }
+
+    function removeFromBlackList(address[] calldata addresses)
+        public
+        onlyRole(DEFAULT_ADMIN_ROLE)
+    {
+        for (uint256 i; i < addresses.length; ++i) {
+            _isBlacklisted[addresses[i]] = false;
+        }
+    }
+
+    function isBlacklisted(address usrAddress) public view returns (bool) {
+        return _isBlacklisted[usrAddress];
     }
 }
