@@ -3,7 +3,17 @@ require('dotenv').config();
 require("@nomiclabs/hardhat-ethers");
 require("@nomiclabs/hardhat-etherscan");
 
-const { MAIN_API_URL, ACCT_PRIVATE_KEY, KOVAN_API_URL, KOVAN_PRIVATE_KEY, API_KEY, RINKEBY_API_URL, RINKEBY_PRIVATE_KEY } = process.env;
+const {
+  MAIN_API_URL,
+  ACCT_PRIVATE_KEY,
+  KOVAN_API_URL,
+  KOVAN_PRIVATE_KEY,
+  API_KEY,
+  RINKEBY_API_URL,
+  RINKEBY_PRIVATE_KEY,
+  ROPSTEN_PRIVATE_KEY,
+  ROPSTEN_API_URL
+} = process.env;
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -22,7 +32,6 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  */
 module.exports = {
   solidity: "0.8.8",
-  defaultNetwork: "rinkeby",
   networks: {
     hardhat: {},
     rinkeby: {
@@ -33,10 +42,15 @@ module.exports = {
       url: `${KOVAN_API_URL}`,
       accounts: [`0x${KOVAN_PRIVATE_KEY}`]
     },
+    ropsten: {
+      url: `${ROPSTEN_API_URL}`,
+      accounts: [`0x${ROPSTEN_PRIVATE_KEY}`]
+    },
     main: {
       url: `${MAIN_API_URL}`,
       accounts: [`0x${ACCT_PRIVATE_KEY}`]
-    }
+    },
+
 
   },
   solidity: {
