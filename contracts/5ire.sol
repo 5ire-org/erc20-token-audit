@@ -51,23 +51,19 @@ contract IRE is ERC20, ERC20Burnable, Pausable, AccessControl {
     }
 
     //Adding multiple addresses to the blacklist - Used to manually block
-    function addToBlackList(address[] calldata addresses)
+    function addToBlackList(address addresses)
         public
         onlyRole(DEFAULT_ADMIN_ROLE)
     {
-        for (uint256 i; i < addresses.length; ++i) {
-            _isBlacklisted[addresses[i]] = true;
-            emit addToBlackListEvent(addresses[i]);
-        }
+        _isBlacklisted[addresses] = true;
+        emit addToBlackListEvent(addresses);
     }
 
-    function removeFromBlackList(address[] calldata addresses)
+    function removeFromBlackList(address addresses)
         public
         onlyRole(DEFAULT_ADMIN_ROLE)
     {
-        for (uint256 i; i < addresses.length; ++i) {
-            _isBlacklisted[addresses[i]] = false;
-        }
+        _isBlacklisted[addresses] = false;
     }
 
     function isBlacklisted(address usrAddress) public view returns (bool) {
